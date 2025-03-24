@@ -1,5 +1,4 @@
 use chrono::{DateTime, Utc};
-use uuid::Uuid;
 
 use super::vault_model::Vault;
 

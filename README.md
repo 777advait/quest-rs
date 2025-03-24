@@ -1,4 +1,4 @@
-## quest-rs
+## quest
 
 A simple obsidian-like command-line tool for note taking built in rust 🔥.
 
@@ -22,14 +22,14 @@ A simple obsidian-like command-line tool for note taking built in rust 🔥.
 
 ### Roadmap
 
-- [x] Setup models
-  - [x] Vault
-  - [x] Log
+- [x] ~Setup models~
+  - [x] ~Vault~
+  - [x] ~Log~
 - [ ] Setup Repositories
   - Vault
-    - [x] create vault
+    - [x] ~create vault~
     - [ ] list vaults
-    - [ ] delete vault
+    - [x] delete vault
     - [ ] rename vault
     - [ ] truncate vault
   - Log

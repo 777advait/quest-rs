@@ -1,3 +1,5 @@
+use std::io::ErrorKind;
+
 use models::{
     log_model::{CreateLog, Log},
     vault_model::CreateVault,
@@ -10,8 +12,21 @@ mod repository;
 mod utils;
 
 fn main() {
-    let vault = VaultRepository::create_vault(CreateVault::new("idk".to_string()))
-        .expect("Failed to create the vault!");
+    let vault_name = "idk";
+    let vault = VaultRepository::create_vault(CreateVault::new(vault_name.to_string()))
+        .or_else(|err| {
+            if err.kind() == ErrorKind::AlreadyExists {
+                println!("Vault \"{vault_name}\" already exists... Deleting and creating new one!");
+
+                VaultRepository::delete_vault(&vault_name)
+                    .expect(&format!("Failed to delete \"{vault_name}\""));
+
+                VaultRepository::create_vault(CreateVault::new(vault_name.to_string()))
+            } else {
+                Err(err)
+            }
+        })
+        .expect("Failed to create/delete vault");
 
     println!("{vault:#?}");
 
