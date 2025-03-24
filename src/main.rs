@@ -1,14 +1,17 @@
 use models::{
     log_model::{CreateLog, Log},
-    vault_model::{CreateVault, Vault},
+    vault_model::CreateVault,
 };
+use repository::vault_repository::VaultRepository;
 
+mod core;
 mod models;
 mod repository;
 mod utils;
 
 fn main() {
-    let vault = Vault::new(CreateVault::new("portfolio thoughts".to_string()));
+    let vault = VaultRepository::create_vault(CreateVault::new("idk".to_string()))
+        .expect("Failed to create the vault!");
 
     println!("{vault:#?}");
 

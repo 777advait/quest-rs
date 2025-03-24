@@ -5,7 +5,7 @@ use super::vault_model::Vault;
 
 #[derive(Debug)]
 pub struct Log {
-    pub id: Uuid,
+    pub id: String,
     pub title: String,
     pub content: String,
     pub vault: Vault,
@@ -22,8 +22,13 @@ pub struct CreateLog {
 
 impl Log {
     pub fn new(data: CreateLog) -> Self {
+        let vault_name = &data.vault.name;
         Self {
-            id: Uuid::new_v4(),
+            id: format!(
+                "{}/{}",
+                vault_name,
+                data.title.to_lowercase().replace(" ", "_")
+            ),
             content: data.content,
             title: data.title,
             vault: data.vault,
